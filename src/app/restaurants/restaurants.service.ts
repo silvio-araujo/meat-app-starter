@@ -13,17 +13,43 @@ import {ErrorHandler} from '../app.error-handler'
 @Injectable()
 export class RestaurantsService {
 
-constructor(private http: Http){}
+  constructor(private http: Http){}
 
-  restaurants(): Observable<Restaurant[]> {
-    return this.http.get(`${MEAT_API}/restaurants`)
+  private baseCall(urlSufix: string): Observable<any> {
+    return this.http.get(`${MEAT_API}/restaurants/${urlSufix}`)
         .map(response => response.json())
         .catch(ErrorHandler.handleError)
-  }
+}
 
-  restaurantById(id: string): Observable<Restaurant> {
-    return this.http.get(`${MEAT_API}/restaurants/${id}`)
-        .map(response => response.json())
-        .catch(ErrorHandler.handleError)
-  }
+restaurants(): Observable<Restaurant[]> {
+  return this.baseCall("")
+}
+
+restaurantById(id: string): Observable<Restaurant> {
+  return this.baseCall(`${id}`)
+}
+
+reviewsOfRestaurant(id: string): Observable<any> {
+  return this.baseCall(`${id}/reviews`)
+}
+
+/*
+restaurants(): Observable<Restaurant[]> {
+  return this.http.get(`${MEAT_API}/restaurants`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
+}
+
+restaurantById(id: string): Observable<Restaurant> {
+  return this.http.get(`${MEAT_API}/restaurants/${id}`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
+}
+
+reviewsOfRestaurant(id: string): Observable<any> {
+  return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
+}
+*/
 }
