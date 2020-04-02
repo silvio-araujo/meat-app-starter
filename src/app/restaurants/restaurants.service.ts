@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
 import {Restaurant} from './restaurant/restaurant.model'
+import {MenuItem} from '../restaurant-detail/menu-item/menu-item.model'
 
 import {MEAT_API} from '../app.api'
 import {ErrorHandler} from '../app.error-handler'
@@ -31,6 +32,10 @@ restaurantById(id: string): Observable<Restaurant> {
 
 reviewsOfRestaurant(id: string): Observable<any> {
   return this.baseCall(`${id}/reviews`)
+}
+
+menuOfRestaurant(id: string): Observable<MenuItem[]> {
+  return this.baseCall(`${id}/menu`)
 }
 
 /*
