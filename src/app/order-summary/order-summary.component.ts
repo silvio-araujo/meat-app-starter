@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSummaryComponent implements OnInit {
 
+  showThanks: boolean = false
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }
